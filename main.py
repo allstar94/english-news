@@ -120,7 +120,7 @@ Rules:
 
     try:
         response = client.models.generate_content(
-            model="gemini-2.5-pro", contents=prompt
+            model="gemini-2.5-flash", contents=prompt
         )
         text = response.text.strip()
         text = re.sub(r"^```(?:json)?\s*", "", text)
@@ -185,7 +185,7 @@ Rules:
 
     try:
         response = client.models.generate_content(
-            model="gemini-2.5-pro", contents=prompt
+            model="gemini-2.5-flash", contents=prompt
         )
         text = response.text.strip()
         text = re.sub(r"^```(?:json)?\s*", "", text)

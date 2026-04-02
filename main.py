@@ -9,12 +9,13 @@ import feedparser
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timezone, timedelta
-import google.generativeai as genai
+from google import genai
 
 # --- Configuration ---
 GEMINI_API_KEY = os.environ["GEMINI_API_KEY"]
 GMAIL_USER = os.environ["GMAIL_USER"]
-GMAIL_APP_PASSWORD = os.environ["GMAIL_APP_PASSWORD"]
+# Strip non-ASCII/non-breaking spaces that can appear when copying app passwords
+GMAIL_APP_PASSWORD = re.sub(r"[^\x20-\x7E]", " ", os.environ["GMAIL_APP_PASSWORD"]).strip()
 RECIPIENT_EMAIL = "alsltar94@gmail.com"
 
 # --- RSS Feeds by Category ---
@@ -62,8 +63,7 @@ def fetch_articles(feeds: list[str], count: int = 5) -> list[dict]:
 
 def generate_category_news(category: str, articles: list[dict]) -> dict:
     """Call Gemini to produce structured news summaries for a category."""
-    genai.configure(api_key=GEMINI_API_KEY)
-    model = genai.GenerativeModel("gemini-2.5-flash")
+    client = genai.Client(api_key=GEMINI_API_KEY)
 
     if articles:
         articles_block = "\n\n".join(
@@ -103,7 +103,9 @@ Rules:
 - Choose vocabulary that is academically or professionally valuable"""
 
     try:
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(
+            model="gemini-2.5-flash", contents=prompt
+        )
         text = response.text.strip()
         # Strip accidental markdown code fences
         text = re.sub(r"^```(?:json)?\s*", "", text)

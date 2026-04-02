@@ -19,6 +19,11 @@ RECIPIENT_EMAILS = ["alsltar94@gmail.com", "k30027@gmail.com"]
 
 # --- RSS Feeds by Category ---
 RSS_FEEDS = {
+    "Hollywood": [
+        "https://www.tmz.com/rss.xml",
+        "https://www.etonline.com/news/rss",
+        "https://pagesix.com/feed/",
+    ],
     "World": [
         "http://feeds.bbci.co.uk/news/world/rss.xml",
         "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
@@ -200,9 +205,10 @@ def build_html_email(news_data: dict, quiz: list[dict], date_str: str) -> str:
     """Build a styled HTML email from the structured news data."""
 
     category_style = {
-        "IT/Tech":  ("#8e44ad", "#9b59b6", "💻"),
-        "Economy":  ("#27ae60", "#2ecc71", "📈"),
-        "World":    ("#c0392b", "#e74c3c", "🌍"),
+        "Hollywood": ("#d4145a", "#e84393", "🎬"),
+        "World":     ("#c0392b", "#e74c3c", "🌍"),
+        "Economy":   ("#27ae60", "#2ecc71", "📈"),
+        "IT/Tech":   ("#8e44ad", "#9b59b6", "💻"),
     }
 
     articles_html = ""

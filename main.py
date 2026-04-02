@@ -19,20 +19,20 @@ RECIPIENT_EMAIL = "alsltar94@gmail.com"
 
 # --- RSS Feeds by Category ---
 RSS_FEEDS = {
-    "IT/Tech": [
-        "https://feeds.feedburner.com/TechCrunch/",
-        "https://www.theverge.com/rss/index.xml",
-        "https://www.wired.com/feed/rss",
+    "World": [
+        "http://feeds.bbci.co.uk/news/world/rss.xml",
+        "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
+        "https://feeds.washingtonpost.com/rss/world",
     ],
     "Economy": [
         "https://www.cnbc.com/id/10001147/device/rss/rss.html",
         "https://rss.nytimes.com/services/xml/rss/nyt/Business.xml",
         "https://feeds.marketwatch.com/marketwatch/topstories/",
     ],
-    "World": [
-        "http://feeds.bbci.co.uk/news/world/rss.xml",
-        "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
-        "https://feeds.washingtonpost.com/rss/world",
+    "IT/Tech": [
+        "https://feeds.feedburner.com/TechCrunch/",
+        "https://www.theverge.com/rss/index.xml",
+        "https://www.wired.com/feed/rss",
     ],
 }
 

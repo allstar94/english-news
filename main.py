@@ -15,7 +15,7 @@ from google import genai
 GEMINI_API_KEY = os.environ["GEMINI_API_KEY"]
 GMAIL_USER = os.environ["GMAIL_USER"]
 GMAIL_APP_PASSWORD = re.sub(r"[^\x20-\x7E]", " ", os.environ["GMAIL_APP_PASSWORD"]).strip()
-RECIPIENT_EMAIL = "alsltar94@gmail.com"
+RECIPIENT_EMAILS = ["alsltar94@gmail.com", "k30027@gmail.com"]
 
 # --- RSS Feeds by Category ---
 RSS_FEEDS = {
@@ -367,7 +367,7 @@ def send_email(html_content: str, date_str: str) -> None:
     msg = MIMEMultipart("alternative")
     msg["Subject"] = f"📰 Daily English News — {date_str}"
     msg["From"] = GMAIL_USER
-    msg["To"] = RECIPIENT_EMAIL
+    msg["To"] = ", ".join(RECIPIENT_EMAILS)
 
     plain = (
         f"Daily English News — {date_str}\n\n"
@@ -378,9 +378,9 @@ def send_email(html_content: str, date_str: str) -> None:
 
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
         server.login(GMAIL_USER, GMAIL_APP_PASSWORD)
-        server.sendmail(GMAIL_USER, RECIPIENT_EMAIL, msg.as_string())
+        server.sendmail(GMAIL_USER, RECIPIENT_EMAILS, msg.as_string())
 
-    print(f"✅ Email sent to {RECIPIENT_EMAIL}")
+    print(f"✅ Email sent to {', '.join(RECIPIENT_EMAILS)}")
 
 
 def main() -> None:
